@@ -77,43 +77,149 @@ The generator (`mockData.ts`) synthesizes:
 - Short-horizon predictive density (now / +15 / +30) with trend classification
 - SOS alerts & spatial scatter via radial randomization
 - Drone operational states + battery + ETA logic
-- Logistics resource depletion timing (ETA minutes)
-- Service health (latency/error envelope)
-- Choke point emergent risk scores (0–1)
-- Announcement stream with AI + human approval flags
+# PROJECT DRISHTI  
+Digital Response & Intelligence System for Holistic Threat Interception
 
-Easily replaceable: swap faker-driven factories with REST/WebSocket ingestion.
+**Registration Number:** TH12915  
+**Team:** Team Aashu  
+**Theme:** Theme 2 – Safety, Security & Surveillance
 
-## 7. Mapping Layer Strategy
+![Stack](https://img.shields.io/badge/Stack-React%20%2B%20TypeScript%20%2B%20Vite-0A84FF) ![UI](https://img.shields.io/badge/UI-TailwindCSS-38BDF8) ![Maps](https://img.shields.io/badge/Maps-Leaflet%20%7C%20Mapbox-1E9F75) ![AI Ready](https://img.shields.io/badge/AI-Assist%20Hooks-purple) ![Status](https://img.shields.io/badge/Status-Hackathon%20Prototype-orange)
+
+*A next‑generation command & intelligence dashboard engineered for extreme crowd management, proactive risk interception, and multi‑agency coordination.*
+
+---
+
+## Table of Contents
+
+1. Executive Pitch  
+2. Why It Matters  
+3. Live Capability Snapshot  
+4. Architecture  
+5. Data Synthesis Model  
+6. Mapping Strategy  
+7. KPI Intelligence Layer  
+8. UX & Theming  
+9. Quick Start  
+10. Deployment  
+11. Roadmap  
+12. Extensibility Hooks  
+13. Team  
+14. Performance Engineering  
+15. Current Limitations  
+16. Contributing (Hackathon Phase)  
+17. License & Usage  
+18. Command Cheat‑Sheet  
+19. Visual Showcase (Placeholders)  
+20. Strategic Summary
+
+---
+
+## 1. Executive Pitch
+
+Project DRISHTI unifies crowd telemetry, drone operations, predictive congestion modelling, logistics awareness, system health, and communication control into a single high‑clarity operational surface. It transforms reactive monitoring into *anticipatory governance*—surfacing emerging choke points, resource depletion risk, and intervention suggestions with AI advisory hooks ready for real model integration.
+
+> DRISHTI = Situational Fusion + Predictive Foresight + Action Orchestration
+
+## 2. Why It Matters
+
+Mass gatherings (e.g. Simhastha Kumbh 2028) compress volatility: human density, misinformation, resource strain, and safety risks. Fragmented dashboards slow response. DRISHTI provides:
+
+- Proactive: 15–30 min density forecasts and choke point ETAs.  
+- Cohesive: Operational + predictive + communication layers in one frame.  
+- Extensible: Mock generators can be swapped for real feeds (WebSocket, MQTT, REST).  
+- Presentation‑Ready: Theming + glass aesthetics for stakeholders & command briefings.  
+- AI‑Ready: Structured approval pipeline for model‑suggested interventions.
+
+## 3. Live Capability Snapshot
+
+| Domain | Implemented Highlights |
+|--------|------------------------|
+| Live Map | Dual engine (Leaflet default, Mapbox optional), sector polygons, animated pilgrims, heat layer, choke point markers |
+| Predictive Crowd | Sector now / +15 / +30 density & trend classification |
+| Choke Points | Risk score (0–1), time‑to‑issue ETA aggregation |
+| Drone Fleet | Status, task, battery, sector assignment, ETAs |
+| Logistics | Stock levels, depletion ETA minutes, low‑stock surfacing |
+| SOS / Alerts | Simulated SOS + AI advisory modal (approve / reject) |
+| Communications | Multi-channel announcements with approval flags |
+| System Health | Latency + error rate + status banding |
+| KPI Ribbon | Continuous marquee of mission-critical indices |
+| Theming | 6 accent palettes + glass mode persistence |
+| Responsiveness | Mobile bottom sheet + compact metric strip |
+| Performance | Lazy loaded views + dynamic map engine selection |
+
+## 4. Architecture
+
+```
+src/
+    components/          Core UI primitives & composite modules
+    components/views     Domain views (analytics, drones, logistics, etc.)
+    contexts/            AppContext (UI state), ThemeContext (accent/glass)
+    utils/               mockData.ts (synthetic telemetry + predictions)
+    hooks/               Responsive media query helpers
+```
+
+Design Principles:
+- Isolation of domain views for code‑splitting.  
+- Predictive + operational data normalized into one generator.  
+- Theming decoupled (context + utility class mapping).  
+- Map engine abstraction (conditional Mapbox import prevents bundle bloat).  
+
+## 5. Data Synthesis Model
+
+`mockData.ts` synthesizes:
+
+- Crowd density baseline shaped by peak hour windows.  
+- Predictive horizon (now / +15 / +30) with trend label.  
+- SOS scatter (geo‑distributed).  
+- Drone operational state machine + ETAs + battery.  
+- Logistics depletion trajectory (minutes to depletion).  
+- Service health (latency + error envelope).  
+- Choke point emergent risk scoring & ETA.  
+- Announcement feed with AI/human approval signals.
+
+> Swap Strategy: Replace faker factories with ingestion adapters (REST/WebSocket) returning identical object structure—no downstream refactor.
+
+## 6. Mapping Strategy
 
 | Mode | Purpose |
 |------|---------|
-| Leaflet (default) | Tokenless open-source runtime, low friction demos |
-| Mapbox (optional) | Higher-fidelity vector tiles if `VITE_MAPBOX_TOKEN` provided |
+| Leaflet (default) | Tokenless, open, light runtime—ideal for demos |
+| Mapbox (optional) | Higher fidelity vector tiles if `VITE_MAPBOX_TOKEN` present |
 
-Dynamic import wrapper prevents bundling heavy Mapbox chunk unless token environment variable exists at build time.
+Dynamic import loads Mapbox only when a token exists—optimizing initial payload for most deployments.
 
-## 8. KPI Logic (Sample Formulas)
+## 7. KPI Intelligence Layer
+
+Formulas (simplified in prototype):
 
 ```text
 Crush Risk Index        = avg(chokePoint.riskScore) * 100
-Supply Sufficiency %    = sum(current) / sum(max) * 100
-Drone Coverage %        = active(non-idle) / total * 100
-Rising Sectors (15m)    = count(prediction.trend == rising & plus15 > 0.7)
-Median Response SLA (s) = avgResponseTime placeholder (future: percentile over incident resolution deltas)
+Supply Sufficiency %    = sum(logistics.current) / sum(logistics.max) * 100
+Drone Coverage %        = activeNonIdleDrones / totalDrones * 100
+Rising Sectors (15m)    = count(predictions where trend=rising AND plus15>0.7)
+Median Response SLA     = avgResponseTime (placeholder – future percentile calc)
 ```
 
-## 9. Theming & UX Polish
+All KPIs stream into a marquee ribbon for continuous passive scanning—reducing cognitive shift.
 
-Available Accents: Blue, Cyan, Emerald, Amber, Violet, Rose.  
-Glass Mode: Applies translucent layered backgrounds with subtle ring and bloom illusions for “executive war-room” aesthetic.  
-Persistence: localStorage (`drishti:accent`, `drishti:glass`).
+## 8. UX & Theming
 
-## 10. Getting Started
+| Aspect | Detail |
+|--------|--------|
+| Accents | Blue · Cyan · Emerald · Amber · Violet · Rose |
+| Glass Mode | Translucent layering, ambient gradient wash, subtle depth shadows |
+| Persistence | `localStorage` keys: `drishti:accent`, `drishti:glass` |
+| Mobile Adaptation | Bottom sheet (Right Panel), collapsible sidebar, condensed metrics |
+| Motion | Framer Motion (entrances, ribbon scroll, interactive panels) |
+
+> Philosophy: High data density without visual fatigue—leveraging contrast hierarchy, subtle gradient energy, and motion as *state context*, not decoration.
+
+## 9. Quick Start
 
 ### Prerequisites
 
-- Node.js 18+ recommended
+- Node.js 18+
 
 ### Install & Run
 
@@ -122,66 +228,58 @@ npm install
 npm run dev
 ```
 
-Visit: <http://localhost:5173>
+Open: <http://localhost:5173>
 
-### Production Build
+### Production Build & Preview
 
 ```bash
 npm run build
 npm run preview
 ```
 
-### Optional: Mapbox Integration
+### Optional: Mapbox Enablement
 
-Create a `.env` (or `.env.local`) file:
+Create `.env`:
 
 ```dotenv
 VITE_MAPBOX_TOKEN=pk.your_token_here
 ```
 
-The map wrapper auto‑switches to Mapbox if token is present.
+Map engine auto‑switches if token is present at build time.
 
-## 11. Deployment (Netlify)
+## 10. Deployment
 
-`netlify.toml` includes:
+Netlify ready (`netlify.toml`):
 
-- SPA redirect (`/* -> /index.html`)
-- Aggressive static asset caching (1 year immutable) except HTML (no cache)
+- SPA redirect (`/* -> /index.html`)  
+- Long‑cache immutable static assets  
+- HTML no‑cache for fresh hydration  
 
-Push to a connected Git repo → enable auto deploy.
+Push to Git → configure Netlify → deploy.
 
-## 12. Security & Operational Considerations (Future)
+## 11. Roadmap (Next Wave)
 
-| Concern | Planned Mitigation |
-|---------|--------------------|
-| Auth / RBAC | JWT / OIDC integration, scoped module claims |
-| Data Integrity | Hash-signed ingestion from edge devices |
-| Privacy | Anonymized crowd telemetry, no PII storage |
-| Resilience | Service health auto-escalation & circuit fallbacks |
-| Offline | Service Worker (asset + last-known snapshot caching) |
+- Directional crowd flow vectors & path pressure visualization.  
+- Clustered pilgrim density with drill‑down.  
+- Time scrubber & replay (temporal reconstruction).  
+- WebSocket ingestion (live drones, SOS, service events).  
+- PWA (offline snapshot + installable shell).  
+- Streaming AI advisory (LLM token streaming UI).  
+- Pilgrim companion mobile micro‑app (guidance + SOS).  
+- Role‑segmented dashboards (Logistics / Security / Medical).  
+- Incident timeline export (PDF / CSV).  
 
-## 13. Roadmap (Next Milestones)
+## 12. Extensibility Hooks
 
-- Advanced map overlays: Directional crowd flow vectors, animated lane arrows
-- Spatial clustering & drill-down for pilgrim scatter
-- Time scrubber (“what-if” replay) for density evolution
-- WebSocket ingestion layer (Live drone + SOS feed)
-- PWA packaging + offline fallback + install prompt
-- AI streaming inference integration (real LLM guided interventions)
-- Mobile Pilgrim Companion (lite guidance + SOS trigger) prototype
-- Role-based dashboards (Security, Medical, Logistics personas)
-- Export / reporting bundle (PDF / CSV snapshots)
+| Module | Replace With |
+|--------|--------------|
+| Mock Generators | REST/WebSocket adapters (shape parity required) |
+| AI Alert Modal | Real inference endpoint (stream + approve) |
+| Drone Fleet | Telemetry broker (MQTT/Kafka → WebSocket) |
+| Map Overlays | Plugin layer registry (future) |
+| KPI Engine | Dedicated analytics microservice |
 
-## 14. Extensibility Hooks
-
-| Module | Swap Strategy |
-|--------|---------------|
-| Mock Generators | Replace with fetch/WebSocket adapters returning same shape |
-| AI Alert Modal | Connect to inference endpoint (stream tokens, incremental suggestion) |
-| Drone Fleet | Integrate with telemetry broker (MQTT/Kafka → WebSocket) |
-| Mapping | Support additional tile providers or vector overlays via plugin interface |
-
-## 15. Team (Team Aashu)
+## 13. Team (Team Aashu)
 
 | Name | Role |
 |------|------|
@@ -190,59 +288,61 @@ Push to a connected Git repo → enable auto deploy.
 | Omkar Mahapatro | Backend Developer |
 | Subrat Kumar Majhi | AI/ML Specialist |
 
-## 16. Naming Conventions
+## 14. Performance Engineering
 
-- Components: PascalCase (`DynamicLiveMap`)
-- Hooks: `useX` (`useResponsive`)
-- Context Keys: `drishti:*` for persistence
-- IDs: Domain-prefixed (`DR-01`, `CPK-2`, `CP-010`)
+- Lazy boundaries for each heavy domain view.  
+- Dynamic Mapbox import avoids ~1.6MB overhead by default.  
+- GPU‑friendly transforms (marquee) over expensive layout thrash.  
+- Lightweight charting (Recharts) for predictable render cycles.  
+- State slicing—context kept lean (no oversized global stores).  
 
-## 17. Performance Notes
+## 15. Current Limitations
 
-- Lazy boundary per view to avoid blocking initial visual paint.
-- Dynamic Mapbox import defers ~1.6MB bundle unless explicitly needed.
-- Animated KPI ribbon uses linear infinite transform (GPU-friendly, low layout churn).
+| Category | Current State |
+|----------|---------------|
+| Data Authenticity | Fully synthetic (no real telemetry yet) |
+| AI Layer | Advisory suggestions stubbed (rules + randomization) |
+| Auth / RBAC | Not implemented (planned OIDC/JWT) |
+| Persistence | No server‑side state—session ephemeral |
+| Offline | PWA/service worker pending |
+| Audit Trail | Not yet tracking operator approvals persistently |
 
-## 18. Limitations (Current Prototype)
+## 16. Contributing (Hackathon Phase)
 
-- All telemetry synthetic; no real incident correlation yet.
-- AI advisory logic stubbed; no model integration.
-- No persistent backend / database binding.
-- Security (auth, audit) unimplemented.
+External contributions are paused until judging completes. Post‑event: open PR with scope, rationale, and performance impact note.
 
-## 19. Contributing (Hackathon Context)
+## 17. License & Usage
 
-External contributions paused during evaluation window. Post-hackathon: propose via PR with concise scope & performance impact statement.
+Hackathon evaluation prototype. For production adaptation or redistribution, obtain written consent from **Team Aashu**. A formal open‑source license may be applied post‑hackathon.
 
-## 20. License / Usage
-
-Hackathon prototype – evaluation & demonstration only. For production adaptation obtain written consent from Team Aashu. (A formal open-source license can be applied post‑event.)
-
-## 21. Quick Commands (Reference)
+## 18. Command Cheat‑Sheet
 
 ```bash
-# Install deps
+# Install dependencies
 npm install
 
-# Dev server
+# Start dev server
 npm run dev
 
-# Build
+# Type check & build
 npm run build
 
-# Preview production
+# Preview production build locally
 npm run preview
 ```
 
-## 22. Screens / Visual Highlights (Suggested)
+## 19. Visual Showcase (Placeholders)
 
-Embed screenshots / GIFs after capturing: Live Map, KPI Ribbon, Drone View, Logistics depletion, Theme palette switch.
+Add screenshots / GIFs:  
+- Live Operational Map  
+- KPI Ribbon (scrolling)  
+- Drone Fleet Panel  
+- Logistics Depletion View  
+- Theme Palette & Glass Mode  
 
----
+## 20. Strategic Summary
 
-### Summary
-
-Project DRISHTI delivers a cohesive, extensible command operations view with predictive risk framing and polished executive presentation aesthetics—positioned as a foundation for integrating real-time feeds, AI-driven decision assistance, and multi-agency coordination at scale.
+Project DRISHTI elevates command oversight from reactive dashboards to forward‑looking orchestration—merging predictive risk, operational telemetry, and human approval loops in a presentation‑ready, extensible shell built for real-world scalability.
 
 ---
 
